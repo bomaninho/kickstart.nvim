@@ -889,6 +889,7 @@ require('lazy').setup({
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
+        transparent = true,
       }
 
       -- Load the colorscheme here.
@@ -1012,5 +1013,19 @@ require('lazy').setup({
   },
 })
 
+-- Toggle transparency function
+local transparent = true
+local function toggle_transparency()
+  transparent = not transparent
+  require('tokyonight').setup {
+    transparent = transparent,
+    on_colors = function(colors) end,
+    on_highlights = function(highlights, colors) end,
+  }
+  vim.cmd 'colorscheme tokyonight'
+end
+
+-- Set keymap
+vim.keymap.set('n', '<leader>tt', toggle_transparency, { desc = 'Toggle transparency' })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
