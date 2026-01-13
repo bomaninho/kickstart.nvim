@@ -778,6 +778,11 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+      },
+      formatters = {
+        stylua = {
+          prepend_args = { '--config-path', vim.fn.expand('~/.config/nvim/.stylua.toml') },
+        },
         -- Conform can also run multiple formatters sequentially
         python = { 'ruff_format' },
         --
