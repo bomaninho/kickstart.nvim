@@ -184,6 +184,28 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+-- Resize mode with Ctrl+W r
+local resize_mode = false
+vim.keymap.set('n', '<C-w>r', function()
+  if not resize_mode then
+    resize_mode = true
+    print('RESIZE MODE - Use arrows to resize, ESC to exit')
+    vim.keymap.set('n', '<Up>', ':resize +2<CR>', { buffer = true })
+    vim.keymap.set('n', '<Down>', ':resize -2<CR>', { buffer = true })
+    vim.keymap.set('n', '<Left>', ':vertical resize -2<CR>', { buffer = true })
+    vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', { buffer = true })
+    vim.keymap.set('n', '<Esc>', function()
+      resize_mode = false
+      vim.keymap.del('n', '<Up>', { buffer = true })
+      vim.keymap.del('n', '<Down>', { buffer = true })
+      vim.keymap.del('n', '<Left>', { buffer = true })
+      vim.keymap.del('n', '<Right>', { buffer = true })
+      vim.keymap.del('n', '<Esc>', { buffer = true })
+      print('Exited resize mode')
+    end, { buffer = true })
+  end
+end, { desc = 'Enter resize mode' })
+
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
