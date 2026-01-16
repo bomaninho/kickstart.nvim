@@ -114,9 +114,9 @@ vim.o.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
+-- vim.schedule(function()
+--   vim.o.clipboard = 'unnamedplus'
+-- end)
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -176,6 +176,10 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- Yank/Put to System Clipboard shortcuts
+vim.keymap.set('n', '<leader>y', '"+y')
+vim.keymap.set('n', '<leader>p', '"+p')
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -189,7 +193,7 @@ local resize_mode = false
 vim.keymap.set('n', '<C-w>r', function()
   if not resize_mode then
     resize_mode = true
-    print('RESIZE MODE - Use arrows to resize, ESC to exit')
+    print 'RESIZE MODE - Use arrows to resize, ESC to exit'
     vim.keymap.set('n', '<Up>', ':resize +2<CR>', { buffer = true })
     vim.keymap.set('n', '<Down>', ':resize -2<CR>', { buffer = true })
     vim.keymap.set('n', '<Left>', ':vertical resize -2<CR>', { buffer = true })
@@ -201,7 +205,7 @@ vim.keymap.set('n', '<C-w>r', function()
       vim.keymap.del('n', '<Left>', { buffer = true })
       vim.keymap.del('n', '<Right>', { buffer = true })
       vim.keymap.del('n', '<Esc>', { buffer = true })
-      print('Exited resize mode')
+      print 'Exited resize mode'
     end, { buffer = true })
   end
 end, { desc = 'Enter resize mode' })
@@ -803,7 +807,7 @@ require('lazy').setup({
       },
       formatters = {
         stylua = {
-          prepend_args = { '--config-path', vim.fn.expand('~/.config/nvim/.stylua.toml') },
+          prepend_args = { '--config-path', vim.fn.expand '~/.config/nvim/.stylua.toml' },
         },
         -- Conform can also run multiple formatters sequentially
         python = { 'ruff_format' },
@@ -1015,7 +1019,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
