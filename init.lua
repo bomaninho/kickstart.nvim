@@ -185,8 +185,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Yank/Put to System Clipboard shortcuts
-vim.keymap.set('n', '<leader>y', '"+y')
-vim.keymap.set('n', '<leader>p', '"+p')
+vim.keymap.set({'n', 'v'}, '<leader>y', '"+y')
+vim.keymap.set({'n', 'v'}, '<leader>p', '"+p')
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
