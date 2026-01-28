@@ -2,4 +2,15 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+return {
+  {
+    'christoomey/vim-tmux-navigator',
+    lazy = false,
+    keys = {
+      { '<c-left>', '<cmd>TmuxNavigateLeft<cr>' },
+      { '<c-down>', '<cmd>TmuxNavigateDown<cr>' },
+      { '<c-up>', '<cmd>TmuxNavigateUp<cr>' },
+      { '<c-right>', '<cmd>TmuxNavigateRight<cr>' },
+    },
+  },
+}
