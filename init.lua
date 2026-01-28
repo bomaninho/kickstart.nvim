@@ -1063,10 +1063,16 @@ local function toggle_transparency()
   transparent = not transparent
   require('tokyonight').setup {
     transparent = transparent,
-    on_colors = function(colors) end,
-    on_highlights = function(highlights, colors) end,
+    styles = {
+      comments = { italic = false },
+    },
   }
   vim.cmd 'colorscheme tokyonight'
+  
+  -- Ensure background matches when transparency is off
+  if not transparent then
+    vim.cmd 'hi Normal guibg=#24283b'
+  end
 end
 
 -- Set keymap
